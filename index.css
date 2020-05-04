@@ -1,0 +1,44 @@
+* {
+    font-family: sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.settings {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.setTimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.setTimer-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    height: 25px;
+    width: 30px;
+}
