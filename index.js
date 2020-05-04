@@ -43,7 +43,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             breakValue: 5,
-            sessionValue: 60,
+            sessionValue: 25,
             mode: "session",
             time: 25 * 60 * 1000,
             active: false,
@@ -71,7 +71,17 @@ class App extends React.Component {
     handleSetTimers = (inc, type) => {
         if (this.state[type] === 60 && inc) return
         if (this.state[type] === 1 && !inc) return
-        this.setState({ [type]: this.state[type] + (inc ? 1 : -1) })
+        let newValue = this.state[type] + (inc ? 1 : -1);
+        if (type === "sessionValue") {
+            this.setState({
+                sessionValue: newValue,
+                time: newValue * 60 * 1000
+            })
+        } else {
+            this.setState({
+                breakValue: newValue
+            })
+        }
     }
 
     handleReset = () => {
@@ -112,7 +122,7 @@ class App extends React.Component {
 
     formatTime = () => {
         let time = moment(this.state.time).format('mm:ss')
-        if(time === "00:00" && this.state.sessionValue === 60){
+        if (time === "00:00" && this.state.sessionValue === 60) {
             return "60:00"
         } else {
             return time;
@@ -127,8 +137,8 @@ class App extends React.Component {
                     <SetTimer type="break" value={this.state.breakValue} handleClick={this.handleSetTimers} />
                     <SetTimer type="session" value={this.state.sessionValue} handleClick={this.handleSetTimers} />
                 </div>
-                <Timer mode={this.state.mode} 
-                    time={this.formatTime()}/>
+                <Timer mode={this.state.mode}
+                    time={this.formatTime()} />
                 <Controls
                     active={this.state.active}
                     handleReset={this.handleReset}
